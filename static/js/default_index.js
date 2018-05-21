@@ -23,8 +23,8 @@ var app = function() {
         data: {
           drawer: true,
           items: [
-            { icon: 'trending_up', text: 'Leaderboard' },
             { icon: 'subscriptions', text: 'Introduction' },
+            { icon: 'trending_up', text: 'Leaderboard' },
             { icon: 'history', text: 'Journal' },
             { icon: 'featured_play_list', text: 'Chat' },
             { icon: 'watch_later', text: 'Progress' }
@@ -39,7 +39,6 @@ var app = function() {
         }
 
     });
-    self.get_memo()
 
     return self;
 };
