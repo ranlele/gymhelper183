@@ -83,6 +83,22 @@
       <v-container fill-height>
         <v-layout justify-center align-center>
 
+    		    <div id="firebaseui-auth-container"></div>
+
+
+
+
+        </v-layout>
+      </v-container>
+    </v-content>
+</v-app>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/5.0.3/firebase.js"></script>
+<script src="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.js"></script>
+<script src="{{=URL('static','js/initFirebase.js')}}"></script>
+<script src="{{=URL('static','js/firebaseinfo.js')}}"></script>
+
 
 <!-- Firebase Login -->
   <script type="text/javascript">
@@ -105,13 +121,10 @@
       ui.start('#firebaseui-auth-container', uiConfig);
     </script>
 
-        </v-layout>
-      </v-container>
-    </v-content>
-</v-app>
+
+
 
 <script src="{{=URL('static', 'js/default_index.js')}}"></script>
-<script src="{{=URL('static', 'js/initFirebase.js')}}"></script>
-<script src="{{=URL('static', 'js/firebaseinfo.js')}}"></script>
-<script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
-<script src="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.js"></script>
+
+
+

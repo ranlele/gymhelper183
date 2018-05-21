@@ -1,4 +1,5 @@
-var config = {
+  // Initialize Firebase
+  var config = {
     apiKey: "AIzaSyC3c6sWevmnubmNkqI-AE1zN4fqVhsmwvU",
     authDomain: "gymhelper183.firebaseapp.com",
     databaseURL: "https://gymhelper183.firebaseio.com",
@@ -7,4 +8,5 @@ var config = {
     messagingSenderId: "580186571176"
   };
   firebase.initializeApp(config);
+
 

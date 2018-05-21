@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{{=URL('static', 'font-awesome-4.6.3/css/font-awesome.min.css')}}">
     <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
     <link href="https://unpkg.com/vuetify/dist/vuetify.min.css" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.css" />
     {{include "web2py_ajax.html"}}
   </head>
   <body class="white">
@@ -25,11 +26,14 @@
       {{include}}
     </main>
   </body>
+   <!-- Firebase -->
   <script src="{{=URL('static','js/marked.min.js')}}"></script>
-  <!-- <script src="{{=URL('static','js/vue.min.js')}}"></script> -->
   <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
   <script src="https://unpkg.com/vuetify/dist/vuetify.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+
+
   {{block bottomjs}}{{end}}
   <script>
     jQuery('.social a').each(function(){var t=jQuery(this); t.attr('href',t.attr('href').replace('{url}',encodeURIComponent(window.location.href)));});
