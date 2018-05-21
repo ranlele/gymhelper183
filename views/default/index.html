@@ -1,12 +1,14 @@
 {{extend 'layout.html'}}
 
 {{block head}}
+
 <script src="{{=URL('static', 'js/vue.js')}}"></script>
 <script>
     var my_url = "{{=URL('api', 'my_method')}}";
 
 
 </script>
+
 {{end}}
 
 <v-app
@@ -102,7 +104,6 @@
       // The start method will wait until the DOM is loaded.
       ui.start('#firebaseui-auth-container', uiConfig);
     </script>
-
 
         </v-layout>
       </v-container>
