@@ -6,12 +6,14 @@ var app = function() {
 
     Vue.config.silent = false; // show all warnings
 
-    // Extends an array
-    self.extend = function(a, b) {
-        for (var i = 0; i < b.length; i++) {
-            a.push(b[i]);
-        }
-    };
+    // self.get_more = function(){
+    //     var num_memos = self.vue.memos.length;
+    //     $.getJSON(get_memos_url(num_memos, num_memos + 10),function(data){
+    //         self.vue.has_more = data.has_more;
+    //         self.extend(self.vue.memos, data.memos);
+    //         self.vue.user_email = data.user_email
+    //     });
+    // }
 
     // Complete as needed.
     self.vue = new Vue({
@@ -19,12 +21,24 @@ var app = function() {
         delimiters: ['${', '}'],
         unsafeDelimiters: ['!{', '}'],
         data: {
-        },
-        methods: {
+          drawer: true,
+          items: [
+            { icon: 'subscriptions', text: 'Introduction' },
+            { icon: 'trending_up', text: 'Leaderboard' },
+            { icon: 'history', text: 'Journal' },
+            { icon: 'featured_play_list', text: 'Chat' },
+            { icon: 'watch_later', text: 'Progress' }
+          ],
+          items2: [
+            { picture: 28, text: 'Joseph' },
+            { picture: 38, text: 'Apple' },
+            { picture: 48, text: 'Xbox Ahoy' },
+            { picture: 58, text: 'Nokia' },
+            { picture: 78, text: 'MKBHD' }
+          ]
         }
 
     });
-
 
     return self;
 };

@@ -40,10 +40,10 @@ header, main, footer {display:block; with:100%} /* IE fix */
 }
 
 /*** buttons ***/
-.btn, button, [type=button], [type=submit] {padding:0.5em 1em; margin:0 0.5em 0.5em 0; display:inline-block; background-color:#26a69a; color:white}
+/*.btn, button, [type=button], [type=submit] {padding:0.5em 1em; margin:0 0.5em 0.5em 0; display:inline-block; background-color:#26a69a; color:white}
 .btn:hover, button:hover, [type=button]:hover, [type=submit]:hover {box-shadow:0 0 10px #666; text-decoration:none; cursor:pointer}
 .btn.small, table .btn {padding:0.25em 0.5em; font-size:0.8em}
-.btn.large {padding:1em 2em; font-size:1.2em}
+.btn.large {padding:1em 2em; font-size:1.2em}*/
 .oval {border-radius:50%}
 
 /*** helpers ***/
@@ -66,11 +66,11 @@ header, main, footer {display:block; with:100%} /* IE fix */
 
 /*** forms ***/
 input:not([type]), input:not([type=checkbox]):not([type=radio]):not([type=button]):not([type=submit]), [type=file]:before {outline:none; padding:0.5em 1em; margin:0.5px; border-bottom:1px solid #ddd; width:100%}
-textarea {width:100%; border:1px solid #ddd; padding:4px 8px; outline:none; outline:none}
+/*textarea {width:100%; border:1px solid #ddd; padding:4px 8px; outline:none; outline:none}*/
 select {-webkit-appearance:none; outline:none; padding:0.5em 1em; border-radius:0; margin:0.5px; border-bottom:1px solid #ddd; width:100%;background-color:transparent}
-input, textarea, select, button, .btn {font-size:12px}
-input:not([type]):hover, input:not([type=checkbox]):not([type=radio]):not([type=button]):not([type=submit]):hover, select:hover, textarea:hover {background-color:#fbf6d9; transition:background-color 1s ease}
-input:invalid, input.error, textarea:invalid, textarea.error {background: #ffdfdf}
+/*input, textarea, select, button, .btn {font-size:12px}*/
+/*input:not([type]):hover, input:not([type=checkbox]):not([type=radio]):not([type=button]):not([type=submit]):hover, select:hover, textarea:hover {background-color:#fbf6d9; transition:background-color 1s ease}*/
+/*input:invalid, input.error, textarea:invalid, textarea.error {background: #ffdfdf}*/
 
 /*** grid ***/
 .container {margin-right:-20px}
@@ -332,7 +332,7 @@ a:not(.btn):not(.noeffect):after {
 
 
 /*** cards from http://codepen.io/edeesims/pen/iGDzk ***/
-.card {perspective: 500px; max-width:100%}
+/*.card {perspective: 500px; max-width:100%}
 .card>div {
   position: absolute;
   width: 100%;
@@ -354,7 +354,7 @@ a:not(.btn):not(.noeffect):after {
 .card>div>div:nth-child(2) {
   transform: rotateY( 180deg );
 }
-
+*/
 /**** tags ****/
 .tags > span {
   padding: 4px 9px;
