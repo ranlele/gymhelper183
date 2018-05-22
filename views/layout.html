@@ -10,9 +10,41 @@
     <link href="{{=URL('static','css/web2py.css')}}" rel="stylesheet" type="text/css"/>
     <link href="{{=URL('static','css/myapp.css')}}" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="{{=URL('static', 'font-awesome-4.6.3/css/font-awesome.min.css')}}">
+    <link href="https://unpkg.com/vuetify/dist/vuetify.min.css" rel="stylesheet"> 
     <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
-    <link href="https://unpkg.com/vuetify/dist/vuetify.min.css" rel="stylesheet">
+    <script src="{{=URL('static', 'js/vue.min.js')}}"></script>
+    <script src="https://unpkg.com/vuetify/dist/vuetify.js"></script>
     <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.css" />
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/5.0.3/firebase.js"></script>
+    <script src="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.js"></script>
+    <script src="{{=URL('static','js/jquery.js')}}"></script>
+    <script src="{{=URL('static', 'js/default_index.js')}}"></script>
+
+    <script src="{{=URL('static','js/initFirebase.js')}}"></script>
+    <script src="{{=URL('static','js/firebaseinfo.js')}}"></script>
+
+    <!-- Firebase Login -->
+      <script type="text/javascript">
+          // FirebaseUI config.
+          var uiConfig = {
+            // signInSuccessUrl: '/gym/default/index',
+            signInOptions: [
+              // Leave the lines as is for the providers you want to offer your users.
+              firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+              firebase.auth.EmailAuthProvider.PROVIDER_ID,
+              firebase.auth.TwitterAuthProvider.PROVIDER_ID,
+            ],
+            // Terms of service url.
+            tosUrl: '<your-tos-url>'
+          };
+
+          // Initialize the FirebaseUI Widget using Firebase.
+          var ui = new firebaseui.auth.AuthUI(firebase.auth());
+          // The start method will wait until the DOM is loaded.
+          ui.start('#firebaseui-auth-container', uiConfig);
+        </script>
+
     {{include "web2py_ajax.html"}}
   </head>
   <body class="white">
@@ -26,11 +58,6 @@
       {{include}}
     </main>
   </body>
-   <!-- Firebase -->
-  <script src="{{=URL('static','js/marked.min.js')}}"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
-  <script src="https://unpkg.com/vuetify/dist/vuetify.js"></script>
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
 
 

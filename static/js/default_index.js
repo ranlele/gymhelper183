@@ -21,30 +21,51 @@ var app = function() {
         delimiters: ['${', '}'],
         unsafeDelimiters: ['!{', '}'],
         data: {
-          drawer: true,
-          items: [
-            { icon: 'subscriptions', text: 'Introduction' },
-            { icon: 'trending_up', text: 'Leaderboard' },
-            { icon: 'history', text: 'Journal' },
-            { icon: 'featured_play_list', text: 'Chat' },
-            { icon: 'watch_later', text: 'Progress' }
-          ],
-          items2: [
-            { picture: 28, text: 'Joseph' },
-            { picture: 38, text: 'Apple' },
-            { picture: 48, text: 'Xbox Ahoy' },
-            { picture: 58, text: 'Nokia' },
-            { picture: 78, text: 'MKBHD' }
-          ]
+            page: 'introduction',
+            drawer: true,
+            items: [
+                { icon: 'subscriptions', text: 'introduction' },
+                { icon: 'trending_up', text: 'leaderboard' },
+                { icon: 'history', text: 'page1' },
+                { icon: 'featured_play_list', text: 'page2' },
+                { icon: 'watch_later', text: 'Progress' }
+            ],
+            exampleList: [
+                'Item 1',
+                'Item 2',
+                'Item 3',
+                'Item 4'
+            ],
+            exampleName: '',
+            exampleEmail: '',
+            exampleSelect: ''
+        },
+        methods: {
+            capitalize(string) {
+                return string.charAt(0).toUpperCase() + string.slice(1)
+            },
+            changePage(page) {
+                if (!USER) return
+                else this.page = page
+            },
+            logout() {
+                firebase.auth().signOut().then(function() {
+                  // Sign-out successful.
+                  location.reload()     
+                }, function(error) {
+                  // An error happened.
+                });
+            },
+            submit() {
+                console.log(this.exampleName)
+            },
+            clear() {
+
+            }
         }
 
     });
-
     return self;
 };
 
 var APP = null;
-
-// This will make everything accessible from the js console;
-// for instance, self.x above would be accessible as APP.x
-jQuery(function(){APP = app();});

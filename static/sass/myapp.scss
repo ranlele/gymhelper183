@@ -10,3 +10,7 @@
 
 @import "constants";
 @import "main";
+
+[v-cloak] {
+  display: none;
+}

@@ -1,18 +1,24 @@
+var USER
+var firstLoad = true
+
 initApp = function() {
-firebase.auth().onAuthStateChanged(function(user) {
-  if (user) {
-    // User is signed in.
-    var displayName = user.displayName;
-    var email = user.email;
-    var emailVerified = user.emailVerified;
-    var photoURL = user.photoURL;
-    var isAnonymous = user.isAnonymous;
-    var uid = user.uid;
-    var providerData = user.providerData;
-    // ...
-  } else {
-    // User is signed out.
-    // ...
-  }
-});
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      // User is signed in.
+      console.log('is login')
+      USER = user;
+      // ...
+    } else {
+      console.log('is not login')
+      USER = undefined
+    }
+    // This will make everything accessible from the js console;
+    // for instance, self.x above would be accessible as APP.x
+    if (firstLoad) {
+      jQuery(function(){APP = app();});
+      firstLoad = false
+    }
+  });
 }
+
+initApp()
