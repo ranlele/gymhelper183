@@ -21,6 +21,7 @@ var app = function() {
         delimiters: ['${', '}'],
         unsafeDelimiters: ['!{', '}'],
         data: {
+            photo:'',
             page: 'introduction',
             drawer: true,
             items: [
@@ -36,7 +37,7 @@ var app = function() {
                 'Item 3',
                 'Item 4'
             ],
-            exampleName: '',
+            inputname: '默认没有',
             exampleEmail: '',
             exampleSelect: ''
         },
@@ -57,10 +58,17 @@ var app = function() {
                 });
             },
             submit() {
-                console.log(this.exampleName)
+                  firebase.database().ref('users/profile/name').update({
+                 inputname : this.inputname
+  });
             },
             clear() {
 
+            },
+            showpicture(){
+                IF(USER)
+                photo = USER.photoURL
+                return photo
             }
         }
 
