@@ -28,7 +28,7 @@ var app = function() {
                 { icon: 'subscriptions', text: 'introduction' },
                 { icon: 'trending_up', text: 'leaderboard' },
                 { icon: 'history', text: 'page1' },
-                { icon: 'featured_play_list', text: 'page2' },
+                { icon: 'featured_play_list', text: 'journal' },
                 { icon: 'watch_later', text: 'Progress' }
             ],
             exampleList: [
@@ -37,22 +37,43 @@ var app = function() {
                 'Item 3',
                 'Item 4'
             ],
+            time:'',
+            miles:'',
+            repetitions:'',
+            sets:'',
             inputname: '默认没有',
             exampleEmail: '',
-            exampleSelect: ''
+            exampleSelect: '',
+            aerobicExerciseSelect:'',
+            anaerobicExerciseSelect:'',
+            anaerobicExerciseList:[
+                'pushUps',
+                'pullUps',
+                'sitUps'
+
+
+            ],
+            aerobicExerciseList:[
+                'running',
+                'walking',
+                'swimming',
+                'spinning',
+                'kickboxing',
+                'dancing'
+            ],
         },
         methods: {
             capitalize(string) {
                 return string.charAt(0).toUpperCase() + string.slice(1)
             },
             changePage(page) {
-                if (!USER) return
-                else this.page = page
+
+                 this.page = page
             },
             logout() {
                 firebase.auth().signOut().then(function() {
                   // Sign-out successful.
-                  location.reload()     
+                  location.reload()
                 }, function(error) {
                   // An error happened.
                 });

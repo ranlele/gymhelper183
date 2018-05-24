@@ -124,12 +124,130 @@
 							</v-flex>
 						</v-layout>
 					</v-flex>
+
 					<v-flex xs12
-							id="page2"
+							id="journal"
 							class="text-xs-center title"
-							v-show="page == 'page2'">
-						<div>PAGE2</div>
-					</v-flex>
+							v-show="page == 'journal'">
+
+
+						<v-container fluid>
+    					<v-layout row  >
+						<v-flex xs4>
+						  <v-card
+						  	width="500px">
+							<v-card-media
+							  class="white--text"
+							  height="450px"
+
+							  src="/gymTest/static/images/running.jpg"
+							>
+							  <v-container fill-height fluid>
+								<v-layout fill-height>
+								  <v-flex xs12 align-end flexbox>
+									<span class="headline">Aerobic Exercise</span>
+								  </v-flex>
+								</v-layout>
+							  </v-container>
+							</v-card-media>
+							<v-card-title>
+								<v-container grid-list-xl>
+
+     							 <v-flex>
+								<v-select
+										v-model="aerobicExerciseSelect"
+										label="Select Exercise"
+										:items="aerobicExerciseList"
+										required
+										light>
+								</v-select>
+								</v-flex>
+     							 <v-flex>
+								 <v-text-field
+											v-model="miles"
+											label="Miles"
+											required
+											light
+								 ></v-text-field>
+								</v-flex>
+     							 <v-flex>
+								<v-text-field
+											v-model="time"
+											label="Time"
+											required
+											light
+								></v-text-field>
+								</v-flex>
+  								</v-container>
+							</v-card-title>
+							<v-card-actions>
+							  <v-btn flat color="orange">Submit</v-btn>
+							</v-card-actions>
+						  </v-card>
+						</v-flex>
+
+						<v-flex xs4>
+
+						</v-flex>
+
+
+						<v-flex xs4>
+						  <v-card
+						  	width="500px">
+							<v-card-media
+							  class="white--text"
+							  height="450px"
+
+							  src="/gymTest/static/images/pushUp.jpg"
+							>
+							  <v-container fill-height fluid>
+								<v-layout fill-height>
+								  <v-flex xs12 align-end flexbox>
+									<span class="headline">Anaerobic Exercise</span>
+								  </v-flex>
+								</v-layout>
+							  </v-container>
+							</v-card-media>
+							<v-card-title>
+
+								<v-container grid-list-xl>
+
+     							 <v-flex>
+								<v-select
+										v-model="anaerobicExerciseSelect"
+										label="Select Exercise"
+										:items="anaerobicExerciseList"
+										required
+										light>
+								</v-select>
+								</v-flex>
+     							 <v-flex>
+								 <v-text-field
+											v-model="sets"
+											label="Sets"
+											required
+											light
+								 ></v-text-field>
+									 </v-flex>
+      								<v-flex>
+								<v-text-field
+											v-model="repetitions"
+											label="Repetitions"
+											required
+											light
+								></v-text-field>
+								 </v-flex>
+
+  								</v-container>
+							</v-card-title>
+							<v-card-actions>
+							  <v-btn flat color="orange">Submit</v-btn>
+							</v-card-actions>
+						  </v-card>
+						</v-flex>
+				  		</v-layout>
+					</v-container>
+				</v-flex>
 				</v-layout>
         	</v-flex>
         </v-layout>
