@@ -83,6 +83,12 @@ var app = function() {
                  inputname : this.inputname
   });
             },
+            submitprofile(){
+                var uid = USER.uid,
+                var exercisename = 
+                firebase.database().ref('users/'+ uid +'/profile/exercisename').update({
+                 inputname : this.inputname
+            }
             clear() {
 
             },
