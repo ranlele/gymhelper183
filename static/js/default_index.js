@@ -37,8 +37,9 @@ var app = function() {
                 'Item 3',
                 'Item 4'
             ],
-            time:'',
+            hours:'',
             miles:'',
+            minutes:'',
             repetitions:'',
             sets:'',
             inputname: '默认没有',
@@ -89,6 +90,35 @@ var app = function() {
             //     firebase.database().ref('users/'+ uid +'/profile/exercisename').update({
             //      inputname : this.inputname
             // },
+
+            submitJournal1(){
+
+                var uid = USER.uid
+                firebase.database().ref('users/'+ uid +'/journal/aerobicExerciseData').update({
+                   aerobicExerciseSelect : this.aerobicExerciseSelect,
+                   miles : this.miles,
+                   hours : this.hours,
+                   minutes :  this.minutes
+                   });
+
+
+
+            },
+
+            submitJournal2(){
+
+                var uid = USER.uid
+                firebase.database().ref('users/'+ uid +'/journal/anaerobicExerciseData').update({
+                  anaerobicExerciseSelect : this.anaerobicExerciseSelect,
+                  sets : this.sets,
+                  repetitions : this.repetitions
+                });
+
+            },
+
+
+
+
             clear() {
 
             },

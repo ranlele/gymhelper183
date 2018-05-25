@@ -170,18 +170,24 @@
 											light
 								 ></v-text-field>
 								</v-flex>
-     							 <v-flex>
+
 								<v-text-field
-											v-model="time"
-											label="Time"
+											v-model="hours"
+											label="hours"
 											required
 											light
 								></v-text-field>
-								</v-flex>
+								<v-text-field
+											v-model="minutes"
+											label="minutes"
+											required
+											light
+								></v-text-field>
+
   								</v-container>
 							</v-card-title>
 							<v-card-actions>
-							  <v-btn flat color="orange">Submit</v-btn>
+							  <v-btn @click="submitJournal1">Submit</v-btn>
 							</v-card-actions>
 						  </v-card>
 						</v-flex>
@@ -241,7 +247,7 @@
   								</v-container>
 							</v-card-title>
 							<v-card-actions>
-							  <v-btn flat color="orange">Submit</v-btn>
+							 <v-btn @click="submitJournal2">Submit</v-btn>
 							</v-card-actions>
 						  </v-card>
 						</v-flex>
