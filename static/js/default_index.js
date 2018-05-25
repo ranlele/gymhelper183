@@ -43,6 +43,8 @@ var app = function() {
             minutes:'',
             repetitions:'',
             sets:'',
+            date:'',
+            today:'',
             inputname: '默认没有',
             exampleEmail: '',
             exampleSelect: '',
@@ -93,9 +95,23 @@ var app = function() {
             // },
 
             submitJournal1(){
+                var today = new Date()
+                 var dd = today.getDate();
+  var mm = today.getMonth()+1; //January is 0!
+  var yyyy = today.getFullYear();
+  var hr = today.getHours();
+  var min = today.getMinutes();
+  var sec = today.getSeconds();
 
+  if(dd<10) {
+      dd = '0'+dd
+  }
+  if(mm<10) {
+      mm = '0'+mm
+  }
+  today = mm + '_' + dd + '_' + yyyy
                 var uid = USER.uid
-                firebase.database().ref('users/'+ uid +'/journal/aerobicExerciseData').update({
+                firebase.database().ref('users/'+ uid +'/journal/aerobicExerciseData/'+today).update({
                    aerobicExerciseSelect : this.aerobicExerciseSelect,
                    miles : this.miles,
                    hours : this.hours,
