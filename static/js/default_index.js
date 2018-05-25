@@ -39,6 +39,7 @@ var app = function() {
             ],
             hours:'',
             miles:'',
+            time:'',
             minutes:'',
             repetitions:'',
             sets:'',
