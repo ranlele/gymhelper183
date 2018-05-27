@@ -21,13 +21,14 @@ var app = function() {
         delimiters: ['${', '}'],
         unsafeDelimiters: ['!{', '}'],
         data: {
+            gradient: 'to top right, rgba(63,81,181, .7), rgba(25,32,72, .7)',
             photo:'',
             page: 'introduction',
             drawer: true,
             items: [
                 { icon: 'subscriptions', text: 'introduction' },
                 { icon: 'trending_up', text: 'leaderboard' },
-                { icon: 'history', text: 'page1' },
+                { icon: 'history', text: 'Profile' },
                 { icon: 'featured_play_list', text: 'journal' },
                 { icon: 'watch_later', text: 'Progress' }
             ],
@@ -45,9 +46,23 @@ var app = function() {
             sets:'',
             date:'',
             today:'',
-            inputname: '默认没有',
-            exampleEmail: '',
-            exampleSelect: '',
+            inputHeight: '',
+            inputWeight: '',
+            inputGender:'',
+            inputBFR:'',
+            inputAge:'',
+            favoritefoodSelect: [
+                'Hotpot',
+                'IceCream',
+                'Piazza',
+            ],
+            favoritegameSelect: [
+                'League of Legends',
+                'OverWatch',
+                'Dota',
+                'PUBG',
+
+            ],
             aerobicExerciseSelect:'',
             anaerobicExerciseSelect:'',
             anaerobicExerciseList:[
@@ -87,15 +102,20 @@ var app = function() {
                  inputname : this.inputname
   });
             },
-            // submitprofile(){
-            //     var uid = USER.uid,
-            //     var exercisename = 
-            //     firebase.database().ref('users/'+ uid +'/profile/exercisename').update({
-            //      inputname : this.inputname
-            // },
+             submitprofile() {
+                 var uid = USER.uid
+                     firebase.database().ref('users/' + uid + '/profile/').update({
+                     BFR: this.inputBFR,
+                     inputHeight: this.inputHeight,
+                     inputWeight: this.inputWeight,
+                     BFR: this.inputWeight,
+                     Age: this.inputAge,
+                     Gender: this.inputGender
+                 });
+             },
 
             submitJournal1(){
-                var today = new Date()
+                var today = new Date();
                  var dd = today.getDate();
   var mm = today.getMonth()+1; //January is 0!
   var yyyy = today.getFullYear();

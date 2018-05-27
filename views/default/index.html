@@ -87,35 +87,67 @@
 							v-show="page == 'leaderboard'">
 						<div>leaderboard</div>
 					</v-flex>
+                    <v-jumbotron
+                            
+                            src="/gymhelper183/static/images/profileBG.jpg"
+                            dark
+                      >
 					<v-flex xs12
-							id="page1"
+							id="Profile"
 							class="text-xs-center title"
-							v-show="page == 'page1'">
-						<v-layout row wrap>
-							<v-flex xs6>
+							v-show="page == 'Profile'">
+
+                        <v-layout row wrap>
+							<v-flex xs12>
 								<v-card light class="pa-3">
 									<v-form ref="form">
-									    <v-text-field
-											v-model="inputname"
-											label="Name"
+                                         <v-text-field
+											v-model="inputGender"
+											label="Gender"
+											required
+											light>
+										</v-text-field>
+                                         <v-text-field
+											v-model="inputAge"
+											label="Age"
 											required
 											light>
 										</v-text-field>
 									    <v-text-field
-											v-model="exampleEmail"
-											label="E-mail"
+											v-model="inputHeight"
+											label="Height"
+											required
+											light>
+										</v-text-field>
+									    <v-text-field
+											v-model="inputWeight"
+											label="Weight"
 											required
 											light>	
 										</v-text-field>
+
+                                         <v-text-field
+											v-model="inputBFR"
+											label="BFR"
+											required
+											light>
+										</v-text-field>
 									    <v-select
-											v-model="exampleSelect"
-											label="Item"
-											:items="exampleList"
+											v-model="favoritefoodSelect"
+											label="Favorite Food"
+											:items="favoritefoodSelect"
+											required
+											light>
+									    </v-select>
+                                        <v-select
+											v-model="favoritegameSelect"
+											label="Favorite Game"
+											:items="favoritegameSelect"
 											required
 											light>
 									    </v-select>
 									    <v-btn
-									      @click="submit">
+									      @click="submitprofile">
 									      submit
 									    </v-btn>
 									    <v-btn @click="clear">clear</v-btn>
@@ -123,7 +155,9 @@
 								</v-card>
 							</v-flex>
 						</v-layout>
+
 					</v-flex>
+                        </v-jumbotron>
 
 					<v-flex xs12
 							id="journal"
