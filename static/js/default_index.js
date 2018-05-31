@@ -50,6 +50,7 @@ var app = function() {
             inputWeight: '150 kg',
             inputBFR:'%',
             inputAge:'25',
+            inputGender:'',
             genderSelect: [
                 'Famale',
                 'Male',

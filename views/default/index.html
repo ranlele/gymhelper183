@@ -101,15 +101,16 @@
 										class="white--text"
 										 height="900px"
 										light class="pa-3"
-										src="/gymhelper183/static/images/profileBG.jpg"
+										src="/gymhelper183New/static/images/profileBG.jpg"
 								>
 									<v-form ref="form">
                                         <v-select
-											v-model="genderSelect"
+											v-model="inputGender"
 											label="Gender"
-											:items="favoritefoodSelect"
+											:items="genderSelect"
 											required
 											>
+                                        </v-select>
                                          <v-text-field
 											v-model="inputAge"
 											label="Age"
