@@ -104,29 +104,29 @@
 										src="/gymhelper183/static/images/profileBG.jpg"
 								>
 									<v-form ref="form">
-                                         <v-text-field
-											v-model="inputGender"
+                                        <v-select
+											v-model="genderSelect"
 											label="Gender"
+											:items="favoritefoodSelect"
 											required
-											light>
-										</v-text-field>
+											>
                                          <v-text-field
 											v-model="inputAge"
 											label="Age"
 											required
-											light>
+											>
 										</v-text-field>
 									    <v-text-field
 											v-model="inputHeight"
 											label="Height"
 											required
-											light>
+											>
 										</v-text-field>
 									    <v-text-field
 											v-model="inputWeight"
 											label="Weight"
 											required
-											light>	
+											>
 										</v-text-field>
 
                                          <v-text-field
@@ -140,14 +140,14 @@
 											label="Favorite Food"
 											:items="favoritefoodSelect"
 											required
-											light>
+											>
 									    </v-select>
                                         <v-select
 											v-model="favoritegameSelect"
 											label="Favorite Game"
 											:items="favoritegameSelect"
 											required
-											light>
+											>
 									    </v-select>
 									    <v-btn
 									      @click="submitprofile">
