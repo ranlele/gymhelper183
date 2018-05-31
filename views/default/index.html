@@ -92,18 +92,22 @@
 					<v-flex
 							id="Profile"
 							class="text-xs-center title"
-							v-show="page == 'Profile'">
+							v-show="page == 'Profile'"
 
-                        <v-card >
-								<v-card
-									width="900px">
+                    >
+
+                        <v-card>
+
 								<v-card-media
 										class="white--text"
-										 height="900px"
-										light class="pa-3"
+										light class="py-5"
+                                        row wrap
 										src="/gymhelper183New/static/images/profileBG.jpg"
-								>
-									<v-form ref="form">
+                                height="1200px">
+
+									<v-form ref="form"
+                                        height="1200px"
+                                    >
                                         <v-select
 											v-model="inputGender"
 											label="Gender"
@@ -156,12 +160,10 @@
 									    </v-btn>
 									    <v-btn @click="clear">clear</v-btn>
 									</v-form>
-								</v-card>
-						</v-card>
-						</v-layout>
-
+								</v-card-media>
+                            </v-card>
 					</v-flex>
-                        </v-jumbotron>
+
 
 					<v-flex xs12
 							id="journal"
