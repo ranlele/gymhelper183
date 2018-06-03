@@ -1,6 +1,17 @@
 <html>
 
 <head>
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/5.0.3/firebase.js"></script>
+  <script src="https://cdn.firebase.com/libs/firebaseui/3.0.0/firebaseui.js"></script>
+  <script src="{{=URL('static','js/jquery.js')}}"></script>
+  <script src="{{=URL('static', 'js/default_index.js')}}"></script>
+  <script src="{{=URL('static','js/initFirebase.js')}}"></script>
+  <script src="{{=URL('static','js/firebaseinfo.js')}}"></script>
+  <script src="{{=URL('static','js/firebaseAuthUI.js')}}"></script>
+  <script src="{{=URL('static','js/echarts.js')}}"></script>
+
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,24 +22,11 @@
   <link href="{{=URL('static','css/web2py.css')}}" rel="stylesheet" type="text/css" />
   <link href="{{=URL('static','css/myapp.css')}}" rel="stylesheet" type="text/css" />
   <link rel="stylesheet" href="{{=URL('static', 'font-awesome-4.6.3/css/font-awesome.min.css')}}">
-  <script src="{{=URL('static','js/echarts.js')}}"></script>
   <link href="https://unpkg.com/vuetify/dist/vuetify.min.css" rel="stylesheet">
   <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
   <script src="{{=URL('static', 'js/vue.min.js')}}"></script>
   <script src="https://unpkg.com/vuetify/dist/vuetify.js"></script>
-  <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.css" />
-  <!-- Firebase -->
-  <script src="https://www.gstatic.com/firebasejs/5.0.3/firebase.js"></script>
-  <script src="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.js"></script>
-  <script src="{{=URL('static','js/jquery.js')}}"></script>
-  <script src="{{=URL('static', 'js/default_index.js')}}"></script>
-  <script src="{{=URL('static','js/initFirebase.js')}}"></script>
-  <script src="{{=URL('static','js/firebaseinfo.js')}}"></script>
-  <script src="{{=URL('static','js/firebaseAuthUI.js')}}"></script>
-
-
-
-  {{include "web2py_ajax.html"}}
+  <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.0.0/firebaseui.css" /> {{include "web2py_ajax.html"}}
 </head>
 
 <body class="white">

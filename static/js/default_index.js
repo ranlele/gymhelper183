@@ -298,7 +298,7 @@ var app = function() {
           },
           tooltip: {},
           legend: {
-            data: ['hours']
+            data: ['miles']
           },
           xAxis: {
             type: 'category',
@@ -318,7 +318,7 @@ var app = function() {
           },
           tooltip: {},
           legend: {
-            data: ['hours']
+            data: ['miles']
           },
           xAxis: {
             type: 'category',
