@@ -7,6 +7,10 @@ initApp = function() {
       // User is signed in.
       console.log('is login')
       USER = user;
+      firebase.database().ref('users/' + USER.uid).update({
+        username: USER.displayName,
+        email: USER.email
+      })
       // ...
     } else {
       console.log('is not login')
@@ -15,7 +19,9 @@ initApp = function() {
     // This will make everything accessible from the js console;
     // for instance, self.x above would be accessible as APP.x
     if (firstLoad) {
-      jQuery(function(){APP = app();});
+      jQuery(function() {
+        APP = app();
+      });
       firstLoad = false
     }
   });

@@ -1,271 +1,450 @@
-{{extend 'layout.html'}}
-
-{{block head}}
+{{extend 'layout.html'}} {{block head}}
 
 <script>
-    var my_url = "{{=URL('api', 'my_method')}}";
-
-
+  var my_url = "{{=URL('api', 'my_method')}}";
 </script>
+
+<style media="screen">
+  .chart-container {
+    position: relative;
+    height: 100 !important;
+    margin: auto;
+  }
+</style>
 
 {{end}}
 
-<v-app
-    id="inspire"
-    dark
-    v-cloak
-  >
-    <v-navigation-drawer
-      v-model="drawer"
-      fixed
-      clipped
-      app
-    >
-      <v-list dense>
-        <v-list-tile v-for="item in items" :key="item.text" @click="changePage(item.text)">
-          <v-list-tile-action>
-            <v-icon>${ item.icon }</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title>
-              ${ capitalize(item.text) }
-            </v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
-        <v-subheader class="mt-3 grey--text text--darken-1">Friends</v-subheader>
-        <v-list-tile class="mt-3" @click="logout()">
-          <v-list-tile-action>
-            <v-icon color="grey darken-1">add_circle_outline</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-title class="grey--text text--darken-1">Logout</v-list-tile-title>
-        </v-list-tile>
-      </v-list>
-    </v-navigation-drawer>
-    <v-toolbar
-      color="red"
-      dense
-      fixed
-      clipped-left
-      app
-    >
-		<v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-		<v-icon class="mx-3">fa fa-crown</v-icon>
-		<v-toolbar-title class="mr-5 align-center">
-		<span class="title">Gym Helper</span>
-		</v-toolbar-title>
-		<v-spacer></v-spacer>
-		<v-tooltip bottom color="red">
-			<v-btn icon slot="activator" @click.native="page='login'">
-				<v-icon>person</v-icon>
-			</v-btn @click= "showpicture">
-			 <img src="photo"> 
-			<span>Login</span>
-	    </v-tooltip>
-    </v-toolbar>
-    <v-content>
-      <v-container fill-height>
-        <v-layout justify-center align-center row wrap fluid>
-        	<v-flex xs12>
-				<v-layout row wrap>
-					<v-flex xs12
-							id="login"
-							v-show="page == 'login'">
-						<div id="firebaseui-auth-container"></div>
-					</v-flex>
-					<v-flex xs12
-							id="introduction"
-							class="text-xs-center title"
-							v-show="page == 'introduction'">
-						<div>introduction</div>
-						  <v-carousel>
-    						<v-carousel-item  v-for="(item,i) in items" :src="item.src" :key="i" ></v-carousel-item>
-  		</v-carousel>
-					</v-flex>
-					<v-flex xs12
-							id="leaderboard"
-							class="text-xs-center title"
-							v-show="page == 'leaderboard'">
-						<div>leaderboard</div>
-					</v-flex>
-					<v-flex xs12
-							id="page1"
-							class="text-xs-center title"
-							v-show="page == 'page1'">
-						<v-layout row wrap>
-							<v-flex xs6>
-								<v-card light class="pa-3">
-									<v-form ref="form">
-									    <v-text-field
-											v-model="inputname"
-											label="Name"
-											required
-											light>
-										</v-text-field>
-									    <v-text-field
-											v-model="exampleEmail"
-											label="E-mail"
-											required
-											light>	
-										</v-text-field>
-									    <v-select
-											v-model="exampleSelect"
-											label="Item"
-											:items="exampleList"
-											required
-											light>
-									    </v-select>
-									    <v-btn
-									      @click="submit">
-									      submit
-									    </v-btn>
-									    <v-btn @click="clear">clear</v-btn>
-									</v-form>
-								</v-card>
-							</v-flex>
-						</v-layout>
-					</v-flex>
-
-					<v-flex xs12
-							id="journal"
-							class="text-xs-center title"
-							v-show="page == 'journal'">
+<v-app id="inspire" dark v-cloak>
+  <v-navigation-drawer v-model="drawer" fixed clipped app>
+    <v-list dense>
+      <v-list-tile v-for="item in items" :key="item.text" @click="changePage(item.text)">
+        <v-list-tile-action>
+          <v-icon>${ item.icon }</v-icon>
+        </v-list-tile-action>
+        <v-list-tile-content>
+          <v-list-tile-title>
+            ${ capitalize(item.text) }
+          </v-list-tile-title>
+        </v-list-tile-content>
+      </v-list-tile>
+      <v-subheader class="mt-3 grey--text text--darken-1"></v-subheader>
+      <v-list-tile class="mt-3" @click="logout()">
+        <v-list-tile-action>
+          <v-icon color="grey darken-1">add_circle_outline</v-icon>
+        </v-list-tile-action>
+        <v-list-tile-title class="grey--text text--darken-1">Logout</v-list-tile-title>
+      </v-list-tile>
+    </v-list>
+  </v-navigation-drawer>
+  <v-toolbar color="teal lighten-2" dense fixed clipped-left app>
+    <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+    <v-icon class="mx-3">fa fa-crown</v-icon>
+    <v-toolbar-title class="mr-5 align-center">
+      <span class="title">Gym Helper</span>
+    </v-toolbar-title>
+    <v-spacer></v-spacer>
+    <v-tooltip bottom color="teal lighten-3" v-if="!isLogin">
+      <v-btn icon slot="activator" @click.native="page='login'">
+        <span>Login</span>
+    </v-tooltip>
+  </v-toolbar>
+  <v-content>
+    <v-container>
+      <v-layout row wrap fluid>
+        <v-flex xs12>
+          <v-layout row wrap>
 
 
-						<v-container fluid>
-    					<v-layout row  >
-						<v-flex xs4>
-						  <v-card
-						  	width="500px">
-							<v-card-media
-							  class="white--text"
-							  height="450px"
 
-							  src="/gymhelper183/static/images/running.jpg"
-							>
-							  <v-container fill-height fluid>
-								<v-layout fill-height>
-								  <v-flex xs12 align-end flexbox>
-									<span class="headline">Aerobic Exercise</span>
-								  </v-flex>
-								</v-layout>
-							  </v-container>
-							</v-card-media>
-							<v-card-title>
-								<v-container grid-list-xl>
+            <v-flex xs12 id="login" v-show="page == 'login'">
 
-     							 <v-flex>
-								<v-select
-										v-model="aerobicExerciseSelect"
-										label="Select Exercise"
-										:items="aerobicExerciseList"
-										required
-										light>
-								</v-select>
-								</v-flex>
-     							 <v-flex>
-								 <v-text-field
-											v-model="miles"
-											label="Miles"
-											required
-											light
-								 ></v-text-field>
-								</v-flex>
+              <div id="firebaseui-auth-container"></div>
 
-								<v-text-field
-											v-model="hours"
-											label="hours"
-											required
-											light
-								></v-text-field>
-								<v-text-field
-											v-model="minutes"
-											label="minutes"
-											required
-											light
-								></v-text-field>
-
-  								</v-container>
-							</v-card-title>
-							<v-card-actions>
-							  <v-btn @click="submitJournal1">Submit</v-btn>
-							</v-card-actions>
-						  </v-card>
-						</v-flex>
-
-						<v-flex xs4>
-
-						</v-flex>
+            </v-flex>
 
 
-						<v-flex xs4>
-						  <v-card
-						  	width="500px">
-							<v-card-media
-							  class="white--text"
-							  height="450px"
 
-							  src="/gymhelper183/static/images/pushUp.jpg"
-							>
-							  <v-container fill-height fluid>
-								<v-layout fill-height>
-								  <v-flex xs12 align-end flexbox>
-									<span class="headline">Anaerobic Exercise</span>
-								  </v-flex>
-								</v-layout>
-							  </v-container>
-							</v-card-media>
-							<v-card-title>
+            <v-flex xs12 id="introduction" class="text-xs-center title" v-show="page == 'introduction'">
 
-								<v-container grid-list-xl>
+              <v-layout>
+                <v-flex xs4 class="px-3">
+                  <v-card>
+                    <v-card-media class="white--text" height="200px" src="/gymhelper183/static/images/runner.jpg">
+                      <v-container fill-height fluid>
+                        <v-layout fill-height>
+                          <v-flex xs12 align-end flexbox>
+                            <span class="headline">Exercise Journal</span>
+                          </v-flex>
+                        </v-layout>
+                      </v-container>
+                    </v-card-media>
+                    <v-card-title>
+                      <div>
+                        <span>Keep your exercise data.</span><br>
+                      </div>
+                    </v-card-title>
+                    <v-card-actions>
+                      <v-btn flat color="orange" @click.native="page='journal'">Explore</v-btn>
+                    </v-card-actions>
+                  </v-card>
+                </v-flex>
 
-     							 <v-flex>
-								<v-select
-										v-model="anaerobicExerciseSelect"
-										label="Select Exercise"
-										:items="anaerobicExerciseList"
-										required
-										light>
-								</v-select>
-								</v-flex>
-     							 <v-flex>
-								 <v-text-field
-											v-model="sets"
-											label="Sets"
-											required
-											light
-								 ></v-text-field>
-									 </v-flex>
-      								<v-flex>
-								<v-text-field
-											v-model="repetitions"
-											label="Repetitions"
-											required
-											light
-								></v-text-field>
-								 </v-flex>
-									<v-text-field
-											v-model="time"
-											label="time"
 
-											light
-								 ></v-text-field>
-  								</v-container>
-							</v-card-title>
-							<v-card-actions>
-							 <v-btn @click="submitJournal2">Submit</v-btn>
-							</v-card-actions>
-						  </v-card>
-						</v-flex>
-				  		</v-layout>
-					</v-container>
-				</v-flex>
-				</v-layout>
-        	</v-flex>
-        </v-layout>
-      </v-container>
-    </v-content>
+
+                <v-flex xs4 class="px-3">
+                  <v-card>
+                    <v-card-media class="white--text" height="200px" src="/gymhelper183/static/images/running-sunset.jpg">
+                      <v-container fill-height fluid>
+                        <v-layout fill-height>
+                          <v-flex xs12 align-end flexbox>
+                            <span class="headline">Leaderboard</span>
+                          </v-flex>
+                        </v-layout>
+                      </v-container>
+                    </v-card-media>
+                    <v-card-title>
+                      <div>
+                        <span>Challenge others on leaderboard.</span><br>
+                      </div>
+                    </v-card-title>
+                    <v-card-actions>
+                      <v-btn flat color="orange" @click.native="page='leaderboard'">Explore</v-btn>
+                    </v-card-actions>
+                  </v-card>
+                </v-flex>
+
+
+
+                <v-flex xs4 class="px-3">
+                  <v-card>
+                    <v-card-media class="white--text" height="200px" src="/gymhelper183/static/images/data.jpg">
+                      <v-container fill-height fluid>
+                        <v-layout fill-height>
+                          <v-flex xs12 align-end flexbox>
+                            <span class="headline">Progress display</span>
+                          </v-flex>
+                        </v-layout>
+                      </v-container>
+                    </v-card-media>
+                    <v-card-title>
+                      <div>
+                        <span>Check your progress frequently.</span><br>
+                      </div>
+                    </v-card-title>
+                    <v-card-actions>
+                      <v-btn flat color="orange" @click.native="page='progress'">Explore</v-btn>
+                    </v-card-actions>
+                  </v-card>
+                </v-flex>
+
+              </v-layout>
+            </v-flex>
+
+
+
+            <v-flex xs12 id="login" v-show="page == 'profile'">
+              <v-layout row wrap>
+                <v-flex xs12 sm8 offset-sm2 class="mt-5">
+                  <v-card light>
+                    <v-layout row wrap>
+                      <v-flex xs12 class="px-4">
+                        <v-select v-model="gender" :items="['male', 'female']" light />
+                      </v-flex>
+                      <v-flex xs4>
+                        <v-subheader light>Age</v-subheader>
+                      </v-flex>
+                      <v-flex xs8 class="px-3">
+                        <v-text-field light v-model="age" suffix="year"></v-text-field>
+                      </v-flex>
+                      <v-flex xs4>
+                        <v-subheader light>Height</v-subheader>
+                      </v-flex>
+                      <v-flex xs8 class="px-3">
+                        <v-text-field light v-model="height" suffix="cm"></v-text-field>
+                      </v-flex>
+                      <v-flex xs4>
+                        <v-subheader light>Weight</v-subheader>
+                      </v-flex>
+                      <v-flex xs8 class="px-3">
+                        <v-text-field light v-model="weight" suffix="kg"></v-text-field>
+                      </v-flex>
+                      <v-flex xs4>
+                        <v-subheader light>Body Fat</v-subheader>
+                      </v-flex>
+                      <v-flex xs8 class="px-3">
+                        <v-text-field light v-model="bodyFat" suffix="%"></v-text-field>
+                      </v-flex>
+                      <v-flex xs12 class="px-2">
+                        <v-btn block class="teal lighten-3" @click="submitprofile">Submit</v-btn>
+                      </v-flex>
+                    </v-layout>
+                  </v-card>
+                </v-flex>
+                <v-flex xs12 sm8 offset-sm2 class="mt-3">
+                  <v-card light class="title text-xs-center pa-5">
+                    Your BMI: <br>
+                    <span v-if="height != 0">
+                      ${BMI}
+                    </span>
+                  </v-card>
+                </v-flex>
+              </v-layout>
+            </v-flex>
+
+
+
+
+            <v-flex xs12 id="leaderboard" class="text-xs-center title" v-show="page == 'leaderboard'">
+              <v-layout row wrap>
+                <v-flex xs12 class="my-3">
+                  <v-card class="white pa-3">
+                    <v-layout row wrap>
+                      <v-flex xs12 sm6 class="px-1">
+                        <v-select v-model="selectedExercise" label="Select Exercise" :items="anaerobicExerciseList.concat(aerobicExerciseList)" required light />
+                      </v-flex>
+                      <v-flex xs12 sm6 class="px-1">
+                        <v-select v-model="selected_month" label="Select Month" :items="['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12']" required light />
+                      </v-flex>
+                    </v-layout>
+                  </v-card>
+                </v-flex>
+                <v-flex xs12>
+                  <v-card class="white pa-3">
+                    <v-list two-line light>
+                      <template v-for="(l, i) in leaderboard" :key="i">
+                        <v-list-tile avatar @click="">
+
+                          <v-list-tile-content>
+                            <v-list-tile-title class="text--blue">${l.user}</v-list-tile-title>
+                            <v-list-tile-sub-title>${l.data}</v-list-tile-sub-title>
+                          </v-list-tile-content>
+                          <v-avatar :color="color(i)" v-if="i < 3">
+                            <span class="white--text headline" :size="30">&nbsp;${i + 1}&nbsp;</span>
+                          </v-avatar>
+                        </v-list-tile>
+                        <v-divider light></v-divider>
+                      </template>
+                    </v-list>
+                  </v-card>
+                </v-flex>
+              </v-layout>
+            </v-flex>
+
+
+
+
+            <v-flex xs12 id="journal" class="text-xs-center title" v-show="page == 'journal'">
+              <v-container fluid>
+                <v-layout row wrap>
+                  <v-flex xs6 class="px-3">
+                    <v-card>
+                      <v-card-media class="white--text" height="300px" src="/gymhelper183/static/images/running.jpg">
+                        <v-container fill-height fluid>
+                          <v-layout fill-height>
+                            <v-flex xs12 align-end flexbox>
+                              <span class="headline">Aerobic Exercise</span>
+                            </v-flex>
+                          </v-layout>
+                        </v-container>
+                      </v-card-media>
+                      <v-card-title>
+                        <v-container grid-list-xl>
+                          <v-flex>
+                            <v-text-field v-model="custom_day" label="custom_day" required light></v-text-field>
+                          </v-flex>
+                          <v-flex>
+                            <v-select v-model="aerobicExerciseSelect" label="Select Exercise" :items="aerobicExerciseList" required light>
+                            </v-select>
+                          </v-flex>
+                          <v-flex>
+                            <v-text-field v-model="miles" label="Miles" required light></v-text-field>
+                          </v-flex>
+
+                          <v-text-field v-model="hours" label="hours" required light></v-text-field>
+                          <v-text-field v-model="minutes" label="minutes" required light></v-text-field>
+
+                        </v-container>
+                      </v-card-title>
+                      <v-card-actions>
+                        <v-btn block class="teal lighten-3" @click="submitJournal1">Submit</v-btn>
+                      </v-card-actions>
+                    </v-card>
+                  </v-flex>
+
+                  <v-flex xs6 class="px-3">
+                    <v-card>
+                      <v-card-media class="white--text" height="300px" src="/gymhelper183/static/images/pushUp.jpg">
+                        <v-container fill-height fluid>
+                          <v-layout fill-height>
+                            <v-flex xs12 align-end flexbox>
+                              <span class="headline">Anaerobic Exercise</span>
+                            </v-flex>
+                          </v-layout>
+                        </v-container>
+                      </v-card-media>
+                      <v-card-title>
+                        <v-container grid-list-xl class="mb-5">
+                          <v-flex>
+                            <v-text-field v-model="custom_day" label="custom_day" required light></v-text-field>
+                          </v-flex>
+                          <v-flex>
+                            <v-select v-model="anaerobicExerciseSelect" label="Select Exercise" :items="anaerobicExerciseList" required light>
+                            </v-select>
+                          </v-flex>
+                          <v-flex>
+                            <v-text-field v-model="sets" label="Sets" required light></v-text-field>
+                          </v-flex>
+                          <v-flex class="mb-4">
+                            <v-text-field v-model="repetitions" label="Repetitions" required light></v-text-field>
+                          </v-flex>
+                        </v-container>
+                      </v-card-title>
+                      <v-card-actions>
+                        <v-btn block class="teal lighten-3" @click="submitJournal2">Submit</v-btn>
+                      </v-card-actions>
+                    </v-card>
+                  </v-flex>
+                </v-layout>
+              </v-container>
+            </v-flex>
+
+
+
+            <v-flex xs12 id="progress" class="text-xs-center title" v-show="page == 'progress'">
+              <v-layout row wrap>
+                <v-flex xs12>
+                  <v-select :items="['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12']" v-model="selected_month" label="Month" single-line></v-select>
+                </v-flex>
+                <v-flex xs6 class="my-2 px-1">
+                  <v-layout row wrap>
+                    <v-flex xs12 class="mb-2">
+                      <v-card class="white px-3 pt-4">
+                        <div id="aerobicRunningChart" style="width: 100%; height:200px;"></div>
+                      </v-card>
+                    </v-flex>
+                    <v-flex xs12 class="mb-2">
+                      <v-card class="white px-3 pt-4">
+                        <div id="aerobicWalkingChart" style="width: 100%; height:200px;"></div>
+                      </v-card>
+                    </v-flex>
+                    <v-flex xs12>
+                      <v-card class="white px-3 pt-4">
+                        <div id="aerobicSwimmingChart" style="width: 100%; height:200px;"></div>
+                      </v-card>
+                    </v-flex>
+                  </v-layout>
+                </v-flex>
+
+                <v-flex xs6 class="my-2 px-1">
+                  <v-layout row wrap>
+                    <v-flex xs12 class="mb-2">
+                      <v-card class="white px-3 pt-4">
+                        <div id="anaerobicpushupsChart" style="width: 100%; height:200px;"></div>
+                      </v-card>
+                    </v-flex>
+                    <v-flex xs12 class="mb-2">
+                      <v-card class="white px-3 pt-4">
+                        <div id="anaerobicpullupsChart" style="width: 100%; height:200px;"></div>
+                      </v-card>
+                    </v-flex>
+                    <v-flex xs12>
+                      <v-card class="white px-3 pt-4">
+                        <div id="anaerobicsitupsChart" style="width: 100%; height:200px;"></div>
+                      </v-card>
+                    </v-flex>
+                  </v-layout>
+                </v-flex>
+              </v-layout>
+            </v-flex>
+
+
+
+          </v-layout>
+        </v-flex>
+      </v-layout>
+    </v-container>
+  </v-content>
+  <v-snackbar :timeout="5000" color="teal lighten-4" multi-line vertical top right v-model="snackbar">
+    Welcome Back ${username}!
+    <v-btn dark flat @click.native="snackbar = false">Close</v-btn>
+  </v-snackbar>
+
+
+  <v-footer height="auto" class="grey darken-3 pl-5">
+    <v-flex 4xs class="pl-5">
+      <v-card-title class="white--text">
+        <strong class="subheading">Developing Tools</strong>
+      </v-card-title>
+      <div>
+        <v-btn flat icon color="blue lighten-2">
+          <v-icon>fa-google</v-icon>
+        </v-btn>
+        Firebase
+      </div>
+      <div>
+        <v-btn flat icon color="blue lighten-2">
+          <v-icon>fa fa-file-word-o</v-icon>
+        </v-btn>
+        web2py
+      </div>
+      <div>
+        <v-btn flat icon color="blue lighten-2">
+          <v-icon>fa fa-hand-peace-o</v-icon>
+        </v-btn>
+        Vue.js
+      </div>
+    </v-flex>
+    <v-flex 4xs class="pl-5">
+      <v-card-title class="white--text">
+        <strong class="subheading">Get connected with us!</strong>
+      </v-card-title>
+      <div>
+        <v-btn flat icon color="blue lighten-2">
+          <v-icon>fa fa-weibo</v-icon>
+        </v-btn>
+        <v-btn flat icon color="blue lighten-2">
+          <v-icon>fa-facebook</v-icon>
+        </v-btn>
+      </div>
+      <div>
+        <v-btn flat icon color="blue lighten-2">
+          <v-icon>fa fa-qq</v-icon>
+        </v-btn>
+        <v-btn flat icon color="blue lighten-2">
+          <v-icon>fa-twitter</v-icon>
+        </v-btn>
+      </div>
+      <div>
+        <v-btn flat icon color="blue lighten-2">
+          <v-icon>fa fa-wechat</v-icon>
+        </v-btn>
+        <v-btn flat icon color="blue lighten-2">
+          <v-icon>fa-instagram</v-icon>
+        </v-btn>
+      </div>
+    </v-flex>
+    <v-flex 4xs class="pl-5">
+      <v-card-title class="white--text">
+        <strong class="subheading">Contact Us!</strong>
+      </v-card-title>
+      <div>
+        <v-btn flat icon color="blue lighten-2">
+          <v-icon>fa-envelope</v-icon>
+        </v-btn>
+        jran4@ucsc.edu, jjiang17@ucsc.edu, wfei@ucsc.edu
+      </div>
+      <div>
+        <v-btn flat icon color="blue lighten-2">
+          <v-icon>fa-home</v-icon>
+        </v-btn>
+        Santa Cruz, CA, US, 95064
+      </div>
+      <div>
+        <v-btn flat icon color="blue lighten-2">
+          <v-icon>fa-phone</v-icon>
+        </v-btn>
+        650-285-7553
+      </div>
+    </v-flex>
+  </v-footer>
 </v-app>
-
-
-
-

@@ -1,85 +1,57 @@
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <link href="{{=URL('static','css/stupid.css')}}" rel="stylesheet" type="text/css"/>
-    <link href="{{=URL('static','css/custom.css')}}" rel="stylesheet" type="text/css"/>
-    <link href="{{=URL('static','css/calendar.css')}}" rel="stylesheet" type="text/css"/>
-    <link href="{{=URL('static','css/web2py.css')}}" rel="stylesheet" type="text/css"/>
-    <link href="{{=URL('static','css/myapp.css')}}" rel="stylesheet" type="text/css"/>
-    <link rel="stylesheet" href="{{=URL('static', 'font-awesome-4.6.3/css/font-awesome.min.css')}}">
-    <link href="https://unpkg.com/vuetify/dist/vuetify.min.css" rel="stylesheet"> 
-    <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
-    <script src="{{=URL('static', 'js/vue.min.js')}}"></script>
-    <script src="https://unpkg.com/vuetify/dist/vuetify.js"></script>
-    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.css" />
-    <!-- Firebase -->
-    <script src="https://www.gstatic.com/firebasejs/5.0.3/firebase.js"></script>
-    <script src="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.js"></script>
-    <script src="{{=URL('static','js/jquery.js')}}"></script>
-    <script src="{{=URL('static', 'js/default_index.js')}}"></script>
-    <script src="{{=URL('static','js/initFirebase.js')}}"></script>
-    <script src="{{=URL('static','js/firebaseinfo.js')}}"></script>
 
-    <!-- Firebase Login -->
-      <script type="text/javascript">
-          // FirebaseUI config.
-        var uiConfig = {
-        callbacks: {
-              signInSuccess: function(currentUser, credential, redirectUrl) {
-                // User successfully signed in.
-                // Return type determines whether we continue the redirect automatically
-                // or whether we leave that to developer to handle.
-                return true;
-              },
-              uiShown: function() {
-                // The widget is rendered.
-                // Hide the loader.
-                // document.getElementById('loader').style.display = 'none';
-              }
-            },
-            // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
-            signInFlow: 'popup',
-            signInSuccessUrl: 'http://127.0.0.1:8000/gymhelper183/default/index',
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <link href="{{=URL('static','css/stupid.css')}}" rel="stylesheet" type="text/css" />
+  <link href="{{=URL('static','css/custom.css')}}" rel="stylesheet" type="text/css" />
+  <link href="{{=URL('static','css/calendar.css')}}" rel="stylesheet" type="text/css" />
+  <link href="{{=URL('static','css/web2py.css')}}" rel="stylesheet" type="text/css" />
+  <link href="{{=URL('static','css/myapp.css')}}" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="{{=URL('static', 'font-awesome-4.6.3/css/font-awesome.min.css')}}">
+  <script src="{{=URL('static','js/echarts.js')}}"></script>
+  <link href="https://unpkg.com/vuetify/dist/vuetify.min.css" rel="stylesheet">
+  <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
+  <script src="{{=URL('static', 'js/vue.min.js')}}"></script>
+  <script src="https://unpkg.com/vuetify/dist/vuetify.js"></script>
+  <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.css" />
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/5.0.3/firebase.js"></script>
+  <script src="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.js"></script>
+  <script src="{{=URL('static','js/jquery.js')}}"></script>
+  <script src="{{=URL('static', 'js/default_index.js')}}"></script>
+  <script src="{{=URL('static','js/initFirebase.js')}}"></script>
+  <script src="{{=URL('static','js/firebaseinfo.js')}}"></script>
+  <script src="{{=URL('static','js/firebaseAuthUI.js')}}"></script>
 
-            signInOptions: [
-              // Leave the lines as is for the providers you want to offer your users.
-              firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-              firebase.auth.EmailAuthProvider.PROVIDER_ID,
-              firebase.auth.TwitterAuthProvider.PROVIDER_ID,
-              firebase.auth.FacebookAuthProvider.PROVIDER_ID,
 
-            ],
-            // Terms of service url.
-            tosUrl: '<your-tos-url>'
-          };
 
-          // Initialize the FirebaseUI Widget using Firebase.
-          var ui = new firebaseui.auth.AuthUI(firebase.auth());
-          // The start method will wait until the DOM is loaded.
-          ui.start('#firebaseui-auth-container', uiConfig);
-        </script>
+  {{include "web2py_ajax.html"}}
+</head>
 
-    {{include "web2py_ajax.html"}}
-  </head>
-  <body class="white">
-<!--     <v-toolbar >
-      <v-layout row wrap> --><!-- 
+<body class="white">
+  <!--     <v-toolbar >
+      <v-layout row wrap> -->
+  <!--
         {{=MENU(response.menu,_class='menu')}}
         {{=auth.navbar(mode='dropdown')}} -->
-<!--       </v-layout>
+  <!--       </v-layout>
     </v-toolbar> -->
-    <main class="white" id="vue-div">
-      {{include}}
-    </main>
-  </body>
+  <main class="white" id="vue-div">
+    {{include}}
+  </main>
+</body>
 
 
 
-  {{block bottomjs}}{{end}}
-  <script>
-    jQuery('.social a').each(function(){var t=jQuery(this); t.attr('href',t.attr('href').replace('{url}',encodeURIComponent(window.location.href)));});
-  </script>
+{{block bottomjs}}{{end}}
+<script>
+  jQuery('.social a').each(function() {
+    var t = jQuery(this);
+    t.attr('href', t.attr('href').replace('{url}', encodeURIComponent(window.location.href)));
+  });
+</script>
+
 </html>
